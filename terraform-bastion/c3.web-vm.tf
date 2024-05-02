@@ -5,11 +5,13 @@ resource "azurerm_linux_virtual_machine" "web_linuxvm" {
   location              = azurerm_resource_group.rg.location
   size                  = "Standard_DS1_v2"
   admin_username        = "azureuser"
+  admin_password = "Admin@12345678"
+  disable_password_authentication = filebase64()
   network_interface_ids = [azurerm_network_interface.web_linux_nic[each.key].id]
-  admin_ssh_key {
+  /*admin_ssh_key {
     username   = "azureuser"
     public_key = file("${path.module}/ssh-key/terraform-azure.pub")
-  }
+  }*/
   os_disk {
     name                 = "disk-${each.key}"
     caching              = "ReadWrite"
