@@ -7,15 +7,15 @@ resource "azurerm_linux_virtual_machine" "mylinuxvm" {
   #size                = "Standard_DS1_v2"
   size           = lookup(var.instance_size, var.resource_group_location)
   admin_username = "azureuser"
-  admin_password = "Admin@12345678"
-  disable_password_authentication = false 
+  #admin_password = "Admin@12345678"
+  #disable_password_authentication = false 
   ###splat operator using element
   ##count index is the length function 
   network_interface_ids = [azurerm_network_interface.example[each.key].id]
-  /*admin_ssh_key {
+  admin_ssh_key {
     username   = "azureuser"
     public_key = file("${path.module}/ssh-key/terraform-azure.pub")
-  }*/
+  }
   os_disk {
     name                 = "osdisk-${each.key}"
     caching              = "ReadWrite"
