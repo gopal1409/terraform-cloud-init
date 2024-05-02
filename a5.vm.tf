@@ -13,7 +13,7 @@ resource "azurerm_linux_virtual_machine" "mylinuxvm" {
   admin_ssh_key {
     username = "azureuser"
     ##3root of the user directory
-    public_key = file("${path.module}/ssh-key/terraform-azure.pub")
+    public_key = file("${path.module}ssh-key/terraform-azure.pub")
   }
   os_disk {
     name                 = "osdisk-${each.key}"
