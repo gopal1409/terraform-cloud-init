@@ -11,9 +11,8 @@ resource "azurerm_linux_virtual_machine" "mylinuxvm" {
   ##count index is the length function 
   network_interface_ids = [azurerm_network_interface.example[each.key].id]
   admin_ssh_key {
-    username = "azureuser"
-    ##3root of the user directory
-    public_key = file("${path.module}ssh-key/terraform-azure.pub")
+    username   = "azureuser"
+    public_key = file("${path.module}/ssh-key/terraform-azure.pub")
   }
   os_disk {
     name                 = "osdisk-${each.key}"
